@@ -1,38 +1,128 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: "Spartan", sans-serif;
+}
+:root {
+	--max-width: clamp(200px, 25rem, 25rem);
+}
 .App {
-  text-align: center;
+	width: 100vw;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.calc-face {
+	/* position: relative; */
+	display: grid;
+	margin: 1.5rem;
+	/* wid */
+	/* max-width: 100vw; */
+
+	width: var(--max-width);
+	grid-template-rows: 1.3fr 1.85fr 6fr;
+
+	grid-template-areas:
+		"theme"
+		"display"
+		"buttons";
+}
+.theme-part {
+	grid-area: theme;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 0.9rem;
+	max-width: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.theme-selector {
+	display: grid;
+	grid-template-areas:
+		". modes"
+		"themeText toggle";
+	align-items: center;
+	max-width: 100%;
+}
+/* <p className="theme-text">Theme</p>
+							<div className="toggle"></div>
+							<ul className="numbers" */
+.theme-text {
+	position: relative;
+	grid-area: themeText;
+	text-transform: uppercase;
+	/* top: 1.5px; */
+	margin-right: 8px;
+}
+.toggle {
+	display: inline-flex;
+	align-items: center;
+	grid-area: toggle;
+	margin: 0px 5px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.numbers {
+	/* max-width: (va); */
+	grid-area: modes;
+	list-style-type: none;
+	display: flex;
+	justify-content: space-evenly;
+	width: 60px;
+	font-size: 10px;
+	margin-bottom: 3px;
+}
+.display {
+	display: flex;
+	padding-inline: 20px;
+	max-width: 100%;
+	justify-content: flex-end;
+	align-items: center;
+	margin-bottom: 1.1rem;
+	overflow-x: hidden;
+}
+.buttons {
+	grid-area: buttons;
+	display: grid;
+	grid-auto-columns: minmax(50px, 100px);
+	grid-template-areas:
+		"seven eight nine del"
+		"four five six plus"
+		"one two three minus"
+		"period zero slash cross"
+		"reset reset equal equal";
+	min-height: 340px;
+	gap: 1rem;
+	padding: 1.5rem 1.5rem 1rem 1.5rem;
+}
+button {
+	/* box-sizing: border-box; */
+	display: flex;
+	border-width: 0px;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	border-radius: 8px;
 }
 
-.App-link {
-  color: #61dafb;
+button p {
+	position: relative;
+	top: 4px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@media screen and (max-width: 376px) {
+	.calc-face {
+		grid-template-rows: 1fr 1.5fr 6fr;
+	}
+	.display {
+		margin-bottom: 1.5rem;
+	}
+	.buttons {
+		grid-auto-rows: 64px;
+		padding: 1.5rem 1.5rem 1rem 1.5rem;
+	}
 }
